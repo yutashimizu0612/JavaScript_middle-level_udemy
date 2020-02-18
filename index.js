@@ -51,3 +51,22 @@ MyObj.prototype.printId = function(id) {
 // コンストラクタ関数内で定義されているthisは、インスタンスとして生成されたオブジェクトのことを指す。
 const newInstance = new MyObj(22);
 newInstance.printId();
+
+
+//===============================
+// ES6で導入されたclassでも同様
+//===============================
+class MyClass {
+  constructor(id) {
+    this.id = id;
+  }
+
+  printId(id) {
+    console.log(this.id);
+  }
+}
+
+// インスタンス化
+// コンストラクタ関数内で定義されているthisは、インスタンスとして生成されたオブジェクトのことを指す。
+const newInstanceVer2 = new MyClass(25);
+newInstanceVer2.printId(); // 25

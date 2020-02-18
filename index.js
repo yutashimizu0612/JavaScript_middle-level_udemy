@@ -1,12 +1,19 @@
-let myObj = {
-  id: 2,
-  printId() {
-    // このthisは、この関数が定義されているオブジェクトを指している。
-    console.log(this.id);
-  }
+const sayFoo = function() {
+  console.log(this['foo']);
 }
 
-myObj.printId();
+// globalオブジェクトに格納された変数（ブラウザでは、windowオブジェクト）
+// letやconstを省いて定義すると、globalオブジェクトの変数になる（バグの温床ゆえ、推奨されない）
+foo = 'foo'
 
-// thisの役割
-// オブジェクトを参照する時に使用される
+const mySecondObj = {
+  foo: 'I`m in the object',
+  sayFoo
+}
+
+// globalオブジェクトがthisとなるため、global変数であるfooが呼ばれる。
+sayFoo();
+
+// mySecondObjというオブジェクトの中で呼ばれるため、thisが指すのは、mySecondObj。
+// よって、mySecondObj.fooが呼ばれる。
+mySecondObj.sayFoo();

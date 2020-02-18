@@ -70,3 +70,45 @@ class MyClass {
 // コンストラクタ関数内で定義されているthisは、インスタンスとして生成されたオブジェクトのことを指す。
 const newInstanceVer2 = new MyClass(25);
 newInstanceVer2.printId(); // 25
+
+
+//===============================
+// 関数が入れ子になった時のthis
+//===============================
+// 関数が入れ子になる場合、2つ目以降の入れ子関数内のthisは、globalオブジェクトを指す
+const outer = {
+  func1: function() {
+    // このthisはfunc1を参照する
+    console.log(this);
+
+    const func2 = function() {
+      // 入れ子になった関数内のthisは、globalオブジェクトを参照する
+      console.log(this);
+
+      const func3 = function() {
+      // 入れ子になった関数内のthisは、globalオブジェクトを参照する
+        console.log(this);
+      }();
+    }();
+  }
+}
+
+outer.func1();
+
+// 入れ子になった関数内でfunc1を呼びたい場合
+const outer2 = {
+  func1: function() {
+    console.log(this);
+    let func = this; // ここで変数を取る
+
+    const func2 = function() {
+      console.log(func);
+
+      const func3 = function() {
+        console.log(func);
+      }();
+    }();
+  }
+}
+
+outer2.func1();

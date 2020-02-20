@@ -52,3 +52,19 @@ const arrowFunc2 = {
 }
 
 arrowFunc2.counter();
+
+
+//============================================
+// 練習
+//============================================
+window.me = 'global';
+const outer = function() {
+  let me = 'outer';
+  return {
+    me: 'inner',
+    say: () => {
+      console.log('me', this.me);
+    }
+  }
+}
+outer().say();

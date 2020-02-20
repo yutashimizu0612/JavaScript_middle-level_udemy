@@ -75,3 +75,58 @@
   console.log(Math.min(...array));
 
 }());
+
+
+
+//============================================
+// bind
+//============================================
+(function() {
+  let myObj = {
+    id: 1,
+    print() {
+      console.log(this.id); // thisはmyObjを指す
+      window.setTimeout(function() {
+        console.log(this.id);// globalオブジェクトを取るので、この場合はundefined
+      }, 1000);
+    }
+  }
+  myObj.print();
+
+  // 上記の問題を解消するには、bindを使用する
+  let myObj2 = {
+    id: 2,
+    print() {
+      console.log(this.id);
+      setTimeout(function() {
+        console.log(this.id);
+      }.bind(this), 1000); // print関数のスコープ内のthisをbindする
+    }
+  }
+  myObj2.print();
+
+  // 変数に格納する方法もある
+  let myObj3 = {
+    id: 3,
+    print() {
+      console.log(this.id);
+      let _that = this; // ここでprint関数のスコープ内のthisを格納
+      setTimeout(function() {
+        console.log(_that.id);
+      }, 1000);
+    }
+  }
+  myObj3.print();
+}());
+
+// ☆ そもそもなぜsetTimeoutの中で呼ばれると、thisはglobalオブジェクト（window）を参照するのか？ ☆
+
+// setTimeoutは、windowオブジェクトのメソッドだから。
+// イメージはこんな感じ
+let window = {
+  setTimeout: function(callback, millisecond) {
+    // stop millisecond
+    callback();
+    // この中で呼ばれるthisはwindowオブジェクトを指す（通常のルール通り）。
+  }
+}

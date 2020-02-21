@@ -13,22 +13,26 @@ const res = timesTwo(2); // 4
 
 
 // ☆ 書き方まとめ ☆
-arrowFunc = () => 33;
-arrowFunc = x => 33;
-arrowFunc = (x) => 33;
-arrowFunc = (x, y) => 33;
+const arrowFunc1 = () => 33;
+const arrowFunc2 = x => 33;
+const arrowFunc3 = (x) => 33;
+const arrowFunc4 = (x, y) => x + y;
+const arrowFunc5 = (x, y) => [x, y]; // 配列も返せる
 // 関数内のコードが2行以上の場合は、{}が必要
-arrowFunc = (x, y) => {
+const arrowFunc6 = (x, y) => {
   let z = x + y;
   console.log(z);
   return z;
 }
 
+// オブジェクトリテラルをreturnする場合は、{}を()で括る必要がある！！！
+const arrowFunc7 = (id) => ({ "id": id });
+
 
 //============================================
 // アロー関数によるthisのbind
 //============================================
-const normalFunc = {
+const sampleFunc = {
   id: 5,
   counter: function() {
     // ここでのthisは、sampleFuncになる
@@ -38,8 +42,8 @@ const normalFunc = {
   }
 }
 
-// setTimeout内でも、同じthisを呼びたい場合
-const arrowFunc2 = {
+// setTimeout内でも、同じthisを呼びたい場合（callやbindを使う方法もある）
+const arrowFunc8 = {
   id: 5,
   counter: function() {
     // setTimeoutのcallback関数内のthisは、arrowFunc2オブジェクトを参照する。
@@ -51,7 +55,7 @@ const arrowFunc2 = {
   }
 }
 
-arrowFunc2.counter();
+arrowFunc8.counter();
 
 
 //============================================

@@ -50,8 +50,10 @@ class BaseballPlayer extends Person {
   }
 }
 
+// Personのインスタンス生成
 let me = new Person("masayuki", "kuwahara");
 me.introduce();
+// BaseballPlayerのインスタンス生成
 let you = new BaseballPlayer("kajitani", "takayuki");
 you.introduce();
 you.hit();
